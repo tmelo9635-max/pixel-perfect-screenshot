@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { gerarSugestao } from "@/lib/sugestao.functions";
@@ -48,7 +48,7 @@ function Index() {
   return (
     <main className="min-h-screen bg-background">
       <header className="bg-primary px-6 py-5 text-primary-foreground">
-        <h1 className="text-xl font-semibold">Sugestão de próximo contato</h1>
+        <div className="flex items-center justify-between"><h1 className="text-xl font-semibold">Sugestão de próximo contato</h1><Link to="/leads" className="text-sm underline">Ver leads</Link></div>
         <p className="text-sm opacity-90">Informe os dados do lead e suas anotações. A IA sugere quando, como e o que falar.</p>
       </header>
       <div className="mx-auto grid max-w-5xl gap-6 p-6 md:grid-cols-2">

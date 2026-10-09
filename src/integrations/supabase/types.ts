@@ -14,16 +14,163 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          cidade: string
+          criado_em: string
+          id: string
+          interesse: string
+          nome: string
+          rede_id: string
+          status: string
+          telefone: string
+          unidade_id: string
+        }
+        Insert: {
+          cidade?: string
+          criado_em?: string
+          id?: string
+          interesse?: string
+          nome: string
+          rede_id: string
+          status?: string
+          telefone?: string
+          unidade_id: string
+        }
+        Update: {
+          cidade?: string
+          criado_em?: string
+          id?: string
+          interesse?: string
+          nome?: string
+          rede_id?: string
+          status?: string
+          telefone?: string
+          unidade_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_rede_id_fkey"
+            columns: ["rede_id"]
+            isOneToOne: false
+            referencedRelation: "redes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leads_unidade_id_fkey"
+            columns: ["unidade_id"]
+            isOneToOne: false
+            referencedRelation: "unidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      redes: {
+        Row: {
+          criado_em: string
+          id: string
+          nome: string
+        }
+        Insert: {
+          criado_em?: string
+          id?: string
+          nome: string
+        }
+        Update: {
+          criado_em?: string
+          id?: string
+          nome?: string
+        }
+        Relationships: []
+      }
+      unidades: {
+        Row: {
+          cidade: string
+          estado: string
+          id: string
+          nome: string
+          rede_id: string
+        }
+        Insert: {
+          cidade?: string
+          estado?: string
+          id?: string
+          nome: string
+          rede_id: string
+        }
+        Update: {
+          cidade?: string
+          estado?: string
+          id?: string
+          nome?: string
+          rede_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unidades_rede_id_fkey"
+            columns: ["rede_id"]
+            isOneToOne: false
+            referencedRelation: "redes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          rede_id: string
+          role: Database["public"]["Enums"]["app_role"]
+          unidade_id: string | null
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          rede_id: string
+          role: Database["public"]["Enums"]["app_role"]
+          unidade_id?: string | null
+          user_id: string
+        }
+        Update: {
+          id?: string
+          rede_id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          unidade_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_rede_id_fkey"
+            columns: ["rede_id"]
+            isOneToOne: false
+            referencedRelation: "redes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_roles_unidade_id_fkey"
+            columns: ["unidade_id"]
+            isOneToOne: false
+            referencedRelation: "unidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_see_unidade: {
+        Args: { _rede: string; _uid: string; _unidade: string }
+        Returns: boolean
+      }
+      is_rede_admin: { Args: { _rede: string; _uid: string }; Returns: boolean }
+      is_rede_member: {
+        Args: { _rede: string; _uid: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "franqueado"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +297,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "franqueado"],
+    },
   },
 } as const

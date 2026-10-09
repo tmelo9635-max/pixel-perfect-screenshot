@@ -8,6 +8,13 @@
       "when": 1791577194921,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791577739644,
+      "tag": "0001_admin_vinculos",
+      "breakpoints": true
     }
   ]
 }

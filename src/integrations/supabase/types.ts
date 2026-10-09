@@ -65,6 +65,21 @@ export type Database = {
           },
         ]
       }
+      profiles: {
+        Row: {
+          email: string
+          id: string
+        }
+        Insert: {
+          email?: string
+          id: string
+        }
+        Update: {
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
       redes: {
         Row: {
           criado_em: string
@@ -163,9 +178,14 @@ export type Database = {
         Args: { _rede: string; _uid: string; _unidade: string }
         Returns: boolean
       }
+      find_user_by_email: { Args: { _email: string }; Returns: string }
       is_rede_admin: { Args: { _rede: string; _uid: string }; Returns: boolean }
       is_rede_member: {
         Args: { _rede: string; _uid: string }
+        Returns: boolean
+      }
+      shares_rede_as_admin: {
+        Args: { _admin: string; _user: string }
         Returns: boolean
       }
     }

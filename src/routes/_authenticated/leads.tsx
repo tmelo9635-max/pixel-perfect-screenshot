@@ -9,7 +9,8 @@ const leadsQuery = queryOptions({
     const [leads, unidades, papeis] = await Promise.all([
       supabase.from("leads").select("*").order("criado_em", { ascending: false }),
       supabase.from("unidades").select("*").order("nome"),
-      supabase.from("user_roles").select("role, redes(nome), unidades(nome)"),
+      supabase.auth.getUser().then(({ data: u }) =>
+        supabase.from("user_roles").select("role, redes(nome), unidades(nome)").eq("user_id", u.user?.id ?? "").order("role")),
     ]);
     if (leads.error) throw leads.error;
     return { leads: leads.data, unidades: unidades.data ?? [], papeis: papeis.data ?? [] };

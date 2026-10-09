@@ -66,6 +66,7 @@ function LeadsPage() {
         </div>
         <div className="flex gap-3 text-sm">
           <Link to="/" className="underline">Sugestão com IA</Link>
+          {papel?.role === "admin" && <Link to="/equipe" className="underline">Equipe</Link>}
           <button onClick={sair} className="underline">Sair</button>
         </div>
       </header>

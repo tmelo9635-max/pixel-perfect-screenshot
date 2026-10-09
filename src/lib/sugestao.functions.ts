@@ -15,7 +15,7 @@ export type LeadInput = z.input<typeof LeadSchema>;
 export const gerarSugestao = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => LeadSchema.parse(data))
   .handler(async ({ data }) => {
-    const apiKey = process.env.LOVABLE_API_KEY;
+    const apiKey = process.env["LOVABLE_API_KEY"];
     if (!apiKey) return { ok: false as const, erro: "IA não configurada." };
 
     const { createOpenAI } = await import("@ai-sdk/openai");

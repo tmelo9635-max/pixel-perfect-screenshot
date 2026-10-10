@@ -89,8 +89,12 @@ function LeadsPage() {
             </thead>
             <tbody>
               {filtrados.map((l) => (
-                <tr key={l.id} className="border-t border-border">
-                  <td className="p-3 font-medium">{l.nome}</td>
+                <tr key={l.id} className="border-t border-border hover:bg-muted/50">
+                  <td className="p-3 font-medium">
+                    <Link to="/leads/$leadId" params={{ leadId: l.id }} className="text-primary hover:underline">
+                      {l.nome}
+                    </Link>
+                  </td>
                   <td className="p-3">{l.telefone}</td>
                   <td className="p-3">{l.cidade}</td>
                   <td className="p-3">{nomeUnidade[l.unidade_id] ?? "—"}</td>
@@ -106,6 +110,7 @@ function LeadsPage() {
         </div>
         <p className="text-xs text-muted-foreground">{filtrados.length} de {data.leads.length} leads</p>
       </div>
-    </main>
+    </AppShell>
   );
 }
+

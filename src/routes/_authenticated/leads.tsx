@@ -1,7 +1,8 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { AppShell } from "@/components/AppShell";
 
 const leadsQuery = queryOptions({
   queryKey: ["leads"],
@@ -34,6 +35,7 @@ export const Route = createFileRoute("/_authenticated/leads")({
 
 const STATUS = ["Novo", "Em contato", "Visita agendada", "Proposta enviada", "Sem resposta"];
 const campo = "rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground";
+
 
 function LeadsPage() {
   const { data } = useSuspenseQuery(leadsQuery);

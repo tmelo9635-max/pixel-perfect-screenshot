@@ -14,6 +14,38 @@ export type Database = {
   }
   public: {
     Tables: {
+      anotacoes_lead: {
+        Row: {
+          autor_id: string
+          criado_em: string
+          id: string
+          lead_id: string
+          texto: string
+        }
+        Insert: {
+          autor_id: string
+          criado_em?: string
+          id?: string
+          lead_id: string
+          texto: string
+        }
+        Update: {
+          autor_id?: string
+          criado_em?: string
+          id?: string
+          lead_id?: string
+          texto?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "anotacoes_lead_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           cidade: string

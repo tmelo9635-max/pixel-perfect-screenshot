@@ -15,6 +15,20 @@
       "when": 1791577739644,
       "tag": "0001_admin_vinculos",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791657328502,
+      "tag": "0002_anotacoes_lead_and_write_policies",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791657342869,
+      "tag": "0003_admin_links_bootstrap",
+      "breakpoints": true
     }
   ]
 }

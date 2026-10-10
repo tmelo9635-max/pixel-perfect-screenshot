@@ -68,13 +68,12 @@ function RedePage() {
           <p className="rounded-md bg-muted p-3 text-sm text-muted-foreground">
             Você não é administrador de nenhuma rede. Crie a primeira para começar.
           </p>
-          <NovaRede />
+          <NovaRedeForm rede={data.redeId} meuId={data.meuId} nome={novaRede} setNome={setNovaRede} onOk={atualizar} />
         </div>
       </AppShell>
     );
   }
 
-  async function NovaRede() { return null; }
 
   async function cadastrarUnidade(e: React.FormEvent) {
     e.preventDefault();

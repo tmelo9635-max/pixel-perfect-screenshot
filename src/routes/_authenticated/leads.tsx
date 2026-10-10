@@ -39,7 +39,6 @@ const campo = "rounded-md border border-input bg-background px-3 py-2 text-sm te
 
 function LeadsPage() {
   const { data } = useSuspenseQuery(leadsQuery);
-  const navigate = useNavigate();
   const [unidade, setUnidade] = useState("");
   const [status, setStatus] = useState("");
   const [cidade, setCidade] = useState("");
@@ -51,33 +50,13 @@ function LeadsPage() {
   );
   const papel = data.papeis[0] as { role: string; redes: { nome: string } | null; unidades: { nome: string } | null } | undefined;
 
-  async function sair() {
-    await supabase.auth.signOut();
-    navigate({ to: "/auth" });
-  }
-
   return (
-    <main className="min-h-screen bg-background">
-      <header className="flex items-center justify-between bg-primary px-6 py-4 text-primary-foreground">
-        <div>
-          <h1 className="text-xl font-semibold">Leads</h1>
-          <p className="text-sm opacity-90">
-            {papel
-              ? `${papel.role === "admin" ? "Admin" : "Franqueado"} · ${papel.redes?.nome ?? ""}${papel.unidades ? " · " + papel.unidades.nome : ""}`
-              : "Sem rede vinculada"}
-          </p>
-        </div>
-        <div className="flex gap-3 text-sm">
-          <Link to="/" className="underline">Sugestão com IA</Link>
-          {papel?.role === "admin" && <Link to="/equipe" className="underline">Equipe</Link>}
-          <button onClick={sair} className="underline">Sair</button>
-        </div>
-      </header>
-
+    <AppShell>
       <div className="mx-auto max-w-6xl space-y-4 p-6">
         {!papel && (
           <p className="rounded-md bg-muted p-3 text-sm text-muted-foreground">
             Sua conta ainda não está vinculada a uma rede ou unidade. Peça ao administrador para liberar seu acesso.
+
           </p>
         )}
         <div className="flex flex-wrap gap-3">
